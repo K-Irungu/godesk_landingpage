@@ -6,6 +6,8 @@ import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import FAQ from "../components/FAQ";
 import Features from "../components/Features";
+import CTA from "../components/CTA";
+import Blogs from "../components/Blogs";
 
 export default function HomePage() {
   // Define the custom theme object for the Carousel
@@ -211,6 +213,8 @@ export default function HomePage() {
       <Hero />
       <FAQ />
       <Features />
+      <CTA />
+      <Blogs />
     </>
   );
 }
