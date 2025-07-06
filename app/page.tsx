@@ -43,9 +43,10 @@ const customCarouselTheme = {
       indicators={false}
       slide={false}
       theme={customCarouselTheme} // Pass the custom theme here
-      className="!rounded-none my-custom-carousel-wrapper"    >
+      className="!rounded-none my-custom-carousel-wrapper" // Only apply padding-top for xl screens and above where navbar is fixed
+    >
       {/* Slide 1 */}
-      <div key="slide1" className="relative w-full h-full !rounded-none ">
+      <div key="slide1" className="relative w-full h-full !rounded-none">
         {" "}
         {/* Also ensure slide container is not rounded */}
         <img
@@ -54,30 +55,32 @@ const customCarouselTheme = {
           className="w-full h-full object-cover !rounded-none" // Ensure image itself is not rounded if somehow applied
           style={{ objectFit: "cover", width: "100%", height: "100%" }}
         />
-        {/* Overlay for consistent darkening - previously uncommented but now added bg-black/40 */}
+        {/* Overlay for consistent darkening */}
         <div className="absolute inset-0 bg-black/40" />
         {/* Text content for Slide 1 */}
         <div className="absolute inset-0 z-10 flex flex-col justify-center px-6 md:px-10 text-white max-w-6xl mx-auto">
-          {/* Wrapper for the text and button to control right alignment */}
-          <div className="flex flex-col items-end p-6 mt-10">
+          {/* Wrapper for the text and button */}
+          {/* For screens below sm, use mt-0. For sm and above, revert to mt-20 (80px). Then xl:pt-15 */}
+          <div className="flex flex-col items-center xl:items-end mt-0 sm:mt-20 pb-4 text-center xl:text-right xl:pt-15 xl:pb-6">
             <motion.h1
               initial={{ y: 40, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.7, delay: 0.2 }}
               viewport={{ once: true, amount: 0.3 }}
-              // Adjusted font sizes for better responsiveness across screen sizes
-              className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-6xl font-thin mb-2 sm:mb-4 md:mb-6 uppercase tracking-wide text-right w-full"
+              // Adjusted font sizes for better responsiveness on small screens
+              className="text-lg sm:text-xl md:text-3xl lg:text-4xl xl:text-6xl font-thin mb-2 sm:mb-4 md:mb-6 uppercase tracking-wide w-full text-center xl:text-right"
             >
               Wherever you go, <br /> our network <br /> follows.
             </motion.h1>
 
-            {/* Blue horizontal line for slide 1 (right aligned) */}
+            {/* Blue horizontal line for slide 1 */}
+            {/* Hidden for screens below xl, shown for xl and above */}
             <motion.div
               initial={{ width: 0, opacity: 0 }}
               whileInView={{ width: "2.5rem", opacity: 1 }} // Default/initial width for xs
               transition={{ duration: 0.8, delay: 0.6 }}
               viewport={{ once: true, amount: 0.3 }}
-              className="h-0.5 sm:h-1 md:h-1.5 bg-blue-500 mb-4 sm:mb-6 md:mb-8 mr-0" // mr-0 for right alignment
+              className="hidden xl:block h-0.5 sm:h-1 md:h-1.5 bg-blue-500 mb-4 sm:mb-6 md:mb-8 mx-auto xl:mr-0" // Centered on mobile, right-aligned on desktop
               // Responsive width for the line
               style={{
                 width: "2.5rem", // default
@@ -92,11 +95,11 @@ const customCarouselTheme = {
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.9, delay: 0.4 }}
               viewport={{ once: true, amount: 0.3 }}
-              // Adjusted font sizes, line height, and tracking for better readability
-              className="text-sm sm:text-base md:text-2xl lg:text-3xl
-                         font-light mb-6 md:mb-10 text-right
+              // Hidden for screens below xl, shown for xl and above
+              className="hidden xl:block text-sm sm:text-base md:text-xl lg:text-2xl xl:text-3xl
+                         font-light mb-6 md:mb-10 w-full text-center xl:text-right
                          max-w-xs sm:max-w-md md:max-w-xl lg:max-w-2xl xl:max-w-3xl
-                         leading-normal sm:leading-relaxed md:leading-loose tracking-normal sm:tracking-wide md:tracking-widest w-full"
+                         leading-normal sm:leading-relaxed md:leading-normal tracking-normal sm:tracking-wide md:tracking-widest"
             >
               We make it a priority to offer flexible
               <br />
@@ -109,14 +112,14 @@ const customCarouselTheme = {
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 1.1, delay: 0.6 }}
               viewport={{ once: true, amount: 0.3 }}
-              className="px-3 py-1.5 sm:px-4 sm:py-2 md:px-8 md:py-4
+              className="px-3 py-1.5 sm:px-4 sm:py-2 md:px-6 md:py-3
                          bg-[#5ca206] hover:bg-[#4d8b05] text-white font-semibold rounded shadow-lg
                          flex items-center justify-center space-x-1 sm:space-x-2 md:space-x-3
                          transition-colors duration-300 ease-in-out border border-white
-                         text-xs sm:text-sm md:text-lg"
+                         text-xs sm:text-sm md:text-base lg:text-base" /* Adjusted button size */
             >
               <span>GET A QUOTE NOW</span>
-              <FaArrowRight className="text-xs sm:text-sm md:text-lg" />
+              <FaArrowRight className="text-xs sm:text-sm md:text-base lg:text-lg" />
             </motion.button>
           </div>
         </div>
@@ -137,23 +140,24 @@ const customCarouselTheme = {
         {/* Text content for Slide 2 */}
         <div className="absolute inset-0 z-10 flex flex-col justify-center px-6 md:px-10 text-white max-w-6xl mx-auto">
           {/* Wrapper for the text and button to control left alignment */}
-          <div className="flex flex-col items-start p-6 my-auto">
+          <div className="flex flex-col items-center xl:items-start mt-0 sm:mt-20 pb-4 text-center xl:text-left xl:pt-15 xl:pb-6"> {/* Changed mt-80 to mt-24 for smallest screens */}
             <motion.h1
               initial={{ y: 40, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.7, delay: 0.2 }}
               viewport={{ once: true, amount: 0.3 }}
-              className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-thin mb-2 sm:mb-4 md:mb-6 uppercase tracking-wide text-left w-full"
+              className="text-lg sm:text-xl md:text-3xl lg:text-4xl xl:text-6xl font-thin mb-2 sm:mb-4 md:mb-6 uppercase tracking-wide w-full text-center xl:text-left"
             >
               Wherever you go <br /> our network <br /> follows.
             </motion.h1>
             {/* Blue horizontal line for slide 2 (left aligned) */}
+            {/* Hidden for screens below xl, shown for xl and above */}
             <motion.div
               initial={{ width: 0, opacity: 0 }}
               whileInView={{ width: "2.5rem", opacity: 1 }} // Default/initial width for xs
               transition={{ duration: 0.8, delay: 0.6 }}
               viewport={{ once: true, amount: 0.3 }}
-              className="h-0.5 sm:h-1 md:h-1.5 bg-blue-500 mb-4 sm:mb-6 md:mb-8 ml-0" // ml-0 for left alignment
+              className="hidden xl:block h-0.5 sm:h-1 md:h-1.5 bg-blue-500 mb-4 sm:mb-6 md:mb-8 mx-auto xl:ml-0" // ml-0 for left alignment
               // Responsive width for the line
               style={{
                 width: "2.5rem", // default
@@ -167,10 +171,11 @@ const customCarouselTheme = {
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.9, delay: 0.4 }}
               viewport={{ once: true, amount: 0.3 }}
-              className="text-sm sm:text-base md:text-2xl lg:text-3xl
-                         font-light mb-6 md:mb-10 text-left
+              // Hidden for screens below xl, shown for xl and above
+              className="hidden xl:block text-sm sm:text-base md:text-xl lg:text-2xl xl:text-3xl
+                         font-light mb-6 md:mb-10 w-full text-center xl:text-left
                          max-w-xs sm:max-w-md md:max-w-xl lg:max-w-2xl xl:max-w-3xl
-                         leading-normal sm:leading-relaxed md:leading-loose tracking-normal sm:tracking-wide md:tracking-widest w-full"
+                         leading-normal sm:leading-relaxed md:leading-normal tracking-normal sm:tracking-wide md:tracking-widest"
             >
               We make it a priority to offer flexible
               <br />
@@ -182,14 +187,14 @@ const customCarouselTheme = {
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 1.1, delay: 0.6 }}
               viewport={{ once: true, amount: 0.3 }}
-              className="px-3 py-1.5 sm:px-4 sm:py-2 md:px-8 md:py-4
+              className="px-3 py-1.5 sm:px-4 sm:py-2 md:px-6 md:py-3
                          bg-[#5ca206] hover:bg-[#4d8b05] text-white font-semibold rounded shadow-lg
                          flex items-center justify-center space-x-1 sm:space-x-2 md:space-x-3
                          transition-colors duration-300 ease-in-out border border-white
-                         text-xs sm:text-sm md:text-lg"
+                         text-xs sm:text-sm md:text-base lg:text-base" /* Adjusted button size */
             >
               <span>GET A QUOTE NOW</span>
-              <FaArrowRight className="text-xs sm:text-sm md:text-lg" />
+              <FaArrowRight className="text-xs sm:text-sm md:text-base lg:text-lg" />
             </motion.button>
           </div>
         </div>
