@@ -1,15 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaSearch, FaTimes, FaBars } from "react-icons/fa";
 
 const Navbar = () => {
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const toggleSearchBar = () => {
     setShowSearchBar(!showSearchBar);
-    // When search bar is toggled, ensure mobile menu is closed
     if (showMobileMenu) {
       setShowMobileMenu(false);
     }
@@ -17,25 +17,51 @@ const Navbar = () => {
 
   const toggleMobileMenu = () => {
     setShowMobileMenu(!showMobileMenu);
-    // When mobile menu is toggled, ensure search bar is closed
     if (showSearchBar) {
       setShowSearchBar(false);
     }
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      // Check if the user has scrolled beyond a certain threshold (e.g., 10px)
+      // and if the screen is xl or wider (where the navbar is fixed)
+      if (window.scrollY > 10 && window.innerWidth >= 1280) { // 1280px is default for xl
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Initial check
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  // Define inline style for the background when scrolled
+  const scrolledBgStyle = scrolled
+    ? { backgroundColor: 'rgba(0, 0, 0, 0.5)' } // Semi-transparent black
+    : { backgroundColor: 'transparent' }; // Fully transparent
+
   return (
     // Navbar Container - Fixed position for xl and above, relative for smaller screens
-    <nav className="bg-transparent relative w-full z-50 top-0 start-0 border-b-[0.5px] border-white/70 xl:fixed">
-      <div className="max-w-screen-full flex items-center justify-between mx-auto p-9"> {/* Added justify-between here */}
+    // Conditionally apply background opacity based on scroll state
+    <nav
+      className={`w-full z-50 top-0 start-0 border-b-[0.5px] border-white/70 transition-all duration-300 ease-in-out
+                  ${scrolled ? 'xl:fixed backdrop-blur-sm' : 'relative xl:fixed'} `} // backdrop-blur-sm is now conditionally applied
+      style={scrolledBgStyle} // Apply the inline style here
+    >
+      <div className="max-w-screen-full flex items-center justify-between mx-auto p-9">
 
         {/* Logo Section */}
-        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse"> {/* Removed px-10 */}
+        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <img src="/images/logo.png" className="h-6 sm:h-9" alt="Logo" />
         </a>
 
         {/* Mobile Toggle Button (Hamburger Icon) - Visible until xl breakpoint */}
-        {/* Placed it next to the logo for justify-between to work */}
-        <div className="flex xl:hidden order-2 z-50"> {/* Ensured z-index is high enough */}
+        <div className="flex xl:hidden order-2 z-50">
           <button
             onClick={toggleMobileMenu}
             type="button"
@@ -45,7 +71,7 @@ const Navbar = () => {
           >
             <span className="sr-only">Open main menu</span>
             {showMobileMenu ? (
-              <FaTimes className="w-5 h-5 text-black" /> 
+              <FaTimes className="w-5 h-5 text-gray-800" />
             ) : (
               <FaBars className="w-5 h-5 text-black" />
             )}
@@ -54,7 +80,7 @@ const Navbar = () => {
 
         {/* Desktop Navigation & Search Section - Hidden until xl breakpoint, then visible */}
         <div
-          className="hidden w-full md:flex :w-full xl:order-1 items-center justify-between px-10"
+          className="hidden w-full md:flex xl:w-full xl:order-1 items-center justify-between px-10"
           id="navbar-sticky"
         >
           {/* Main Menu Items */}
@@ -165,7 +191,7 @@ const Navbar = () => {
       {/* Mobile Menu Overlay - Appears below the navbar (mobile only) */}
       {showMobileMenu && (
         <div className="absolute top-full left-0 w-full bg-white shadow-lg xl:hidden z-40 overflow-y-auto"
-             style={{ height: 'calc(100vh - 96px)' }}> {/* Adjust 96px based on your actual navbar height */}
+             style={{ height: 'calc(100vh - 96px)' }}>
 
           <ul className="flex flex-col p-4 font-medium border-t border-gray-100">
             <li>
