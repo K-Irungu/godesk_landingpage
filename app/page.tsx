@@ -5,6 +5,7 @@ import { FaArrowRight } from "react-icons/fa6";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import FAQ from "../components/FAQ";
+import Features from "../components/Features";
 
 export default function HomePage() {
   // Define the custom theme object for the Carousel
@@ -209,6 +210,7 @@ export default function HomePage() {
       </Carousel>
       <Hero />
       <FAQ />
+      <Features />
     </>
   );
 }
