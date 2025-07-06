@@ -2,7 +2,7 @@ import React from "react";
 
 const Hero = () => {
   return (
-    <section className="bg-white py-16 lg:py-24">
+    <section className="bg-white py-16 lg:py-16">
       {/* Adjusted grid for full width on smaller screens */}
       {/* md:grid md:grid-cols-2 will now only apply from 'md' breakpoint up to 'xl' */}
       {/* xl:grid-cols-2 ensures it goes back to 2 columns at xl breakpoint */}
