@@ -8,6 +8,7 @@ import FAQ from "../components/FAQ";
 import Features from "../components/Features";
 import CTA from "../components/CTA";
 import Blogs from "../components/Blogs";
+import Contact from "../components/Contact";
 
 export default function HomePage() {
   // Define the custom theme object for the Carousel
@@ -215,6 +216,7 @@ export default function HomePage() {
       <Features />
       <CTA />
       <Blogs />
+      <Contact />
     </>
   );
 }
