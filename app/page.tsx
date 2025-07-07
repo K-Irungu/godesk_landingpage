@@ -87,17 +87,11 @@ export default function HomePage() {
               {/* Hidden for screens below xl, shown for xl and above */}
               <motion.div
                 initial={{ width: 0, opacity: 0 }}
-                whileInView={{ width: "2.5rem", opacity: 1 }} // Default/initial width for xs
+                whileInView={{ width: "2.5rem", opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
                 viewport={{ once: true, amount: 0.3 }}
-                className="hidden xl:block h-0.5 sm:h-1 md:h-1.5 bg-blue-500 mb-4 sm:mb-6 md:mb-8 mx-auto xl:mr-0" // Centered on mobile, right-aligned on desktop
-                // Responsive width for the line
-                style={{
-                  width: "2.5rem", // default
-                  "@screen sm": { width: "3.5rem" },
-                  "@screen md": { width: "6rem" },
-                  "@screen lg": { width: "8rem" },
-                }}
+                className="hidden xl:block h-0.5 sm:h-1 md:h-1.5 bg-blue-500 mb-4 sm:mb-6 md:mb-8 mx-auto xl:mr-0 
+             w-10 sm:w-14 md:w-24 lg:w-32" // Tailwind responsive width: 2.5rem, 3.5rem, 6rem, 8rem
               />
 
               <motion.h2
