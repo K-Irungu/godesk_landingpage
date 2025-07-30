@@ -10,6 +10,7 @@ import CTA from "../components/CTA";
 import Blogs from "../components/Blogs";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
+import HowItWorks from "@/components/HowItWorks";
 
 export default function HomePage() {
   // Define the custom theme object for the Carousel
@@ -80,7 +81,7 @@ export default function HomePage() {
                 // Adjusted font sizes for better responsiveness on small screens
                 className="text-lg sm:text-xl md:text-3xl lg:text-4xl xl:text-6xl font-thin mb-2 sm:mb-4 md:mb-6 uppercase tracking-wide w-full text-center xl:text-right"
               >
-                Wherever you go, <br /> our network <br /> follows.
+                Smarter Calls <br /> Happier Customers.
               </motion.h1>
 
               {/* Blue horizontal line for slide 1 */}
@@ -105,9 +106,9 @@ export default function HomePage() {
                          max-w-xs sm:max-w-md md:max-w-xl lg:max-w-2xl xl:max-w-3xl
                          leading-normal sm:leading-relaxed md:leading-normal tracking-normal sm:tracking-wide md:tracking-widest"
               >
-                We make it a priority to offer flexible
+                Cloud PBX & Call Center Software
                 <br />
-                services to accommodate your needs
+                Designed to Make Every Call Count
               </motion.h2>
 
               {/* Get a Quote Now Button */}
@@ -120,9 +121,9 @@ export default function HomePage() {
                          bg-[#5ca206] hover:bg-[#4d8b05] text-white font-semibold rounded shadow-lg
                          flex items-center justify-center space-x-1 sm:space-x-2 md:space-x-3
                          transition-colors duration-300 ease-in-out border border-white
-                         text-xs sm:text-sm md:text-base lg:text-base" /* Adjusted button size */
+                         text-xs sm:text-sm md:text-base lg:text-base uppercase" /* Adjusted button size */
               >
-                <span>GET A QUOTE NOW</span>
+                <span>Book a free demo</span>
                 <FaArrowRight className="text-xs sm:text-sm md:text-base lg:text-lg" />
               </motion.button>
             </div>
@@ -158,15 +159,14 @@ export default function HomePage() {
               </motion.h1>
               {/* Blue horizontal line for slide 2 (left aligned) */}
               {/* Hidden for screens below xl, shown for xl and above */}
-<motion.div
-  initial={{ width: 0, opacity: 0 }}
-  whileInView={{ width: "2.5rem", opacity: 1 }}
-  transition={{ duration: 0.8, delay: 0.6 }}
-  viewport={{ once: true, amount: 0.3 }}
-  className="hidden xl:block h-0.5 sm:h-1 md:h-1.5 bg-blue-500 mb-4 sm:mb-6 md:mb-8 mx-auto xl:ml-0 
+              <motion.div
+                initial={{ width: 0, opacity: 0 }}
+                whileInView={{ width: "2.5rem", opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                viewport={{ once: true, amount: 0.3 }}
+                className="hidden xl:block h-0.5 sm:h-1 md:h-1.5 bg-blue-500 mb-4 sm:mb-6 md:mb-8 mx-auto xl:ml-0 
              w-10 sm:w-14 md:w-24 lg:w-32"
-/>
-
+              />
               <motion.h2
                 initial={{ y: 50, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
@@ -202,10 +202,11 @@ export default function HomePage() {
         </div>
       </Carousel>
       <Hero />
-      <FAQ />
       <Features />
+      <HowItWorks />
+      <FAQ />
       <CTA />
-      <Blogs />
+      {/* <Blogs /> */}
       <Contact />
       <Footer />
     </>
